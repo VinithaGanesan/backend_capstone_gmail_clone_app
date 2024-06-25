@@ -1,5 +1,5 @@
 const TokenShield = require('../Middlewares/TokenShield');
-const { GET_ALL_EMAILS, COMPOSE_NEW_EMAIL, TOGGLE_STARRED_EMAIL, MOVES_EMAILS_TO_BIN, DELETE_EMAILS, SAVE_DRAFT_EMAIL } = require('../controller/emailcontroller');
+const { GET_ALL_EMAILS, COMPOSE_NEW_EMAIL, TOGGLE_STARRED_EMAIL, MOVES_EMAILS_TO_BIN, DELETE_EMAILS, SAVE_DRAFT_EMAIL, SEARCH_EMAIL } = require('../controller/emailcontroller');
 
 
 const EmailRouter = require('express').Router();
@@ -10,6 +10,8 @@ EmailRouter.get('/emails/:type', TokenShield, GET_ALL_EMAILS);
 EmailRouter.post('/save', COMPOSE_NEW_EMAIL);
 // save draft email
 EmailRouter.post('/savedraft', SAVE_DRAFT_EMAIL)
+// search emails
+EmailRouter.get('/search', SEARCH_EMAIL);
 //toggle starred email using post method
 EmailRouter.post('/starred', TOGGLE_STARRED_EMAIL);
 // select mails and moved to bin

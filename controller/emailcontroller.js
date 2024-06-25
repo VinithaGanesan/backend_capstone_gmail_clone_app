@@ -86,6 +86,29 @@ async function SAVE_DRAFT_EMAIL(req, res, next) {
     }
 }
 
+async function SEARCH_EMAIL(req, res, next) {
+    try {
+        const {query} = req.body;
+        const emails = await Email.find({  
+            $or: [
+              { subject: new RegExp(query, 'i') },
+              { body: new RegExp(query, 'i') },
+            ],
+           });
+
+        return res.status(200).json({
+            success: true,
+            message: 'all mails searched successfully',
+            data: emails,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            error: error.message,
+        });
+    }
+}
+
 
 async function TOGGLE_STARRED_EMAIL(req, res, next) {
     try {
@@ -142,5 +165,6 @@ module.exports = {
     TOGGLE_STARRED_EMAIL,
     MOVES_EMAILS_TO_BIN,
     DELETE_EMAILS,
-    SAVE_DRAFT_EMAIL
+    SAVE_DRAFT_EMAIL,
+    SEARCH_EMAIL
 }
