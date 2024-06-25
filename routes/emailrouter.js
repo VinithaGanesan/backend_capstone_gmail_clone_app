@@ -11,7 +11,7 @@ EmailRouter.post('/save', COMPOSE_NEW_EMAIL);
 // save draft email
 EmailRouter.post('/savedraft', SAVE_DRAFT_EMAIL)
 // search emails
-EmailRouter.get('/search', SEARCH_EMAIL);
+EmailRouter.get('/search', TokenShield, SEARCH_EMAIL);
 //toggle starred email using post method
 EmailRouter.post('/starred', TOGGLE_STARRED_EMAIL);
 // select mails and moved to bin

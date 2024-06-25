@@ -88,13 +88,7 @@ async function SAVE_DRAFT_EMAIL(req, res, next) {
 
 async function SEARCH_EMAIL(req, res, next) {
     try {
-        const {query} = req.body;
-        const emails = await Email.find({  
-            $or: [
-              { subject: new RegExp(query, 'i') },
-              { body: new RegExp(query, 'i') },
-            ],
-           });
+        const emails = await Email.find({ userId: req.userId });
 
         return res.status(200).json({
             success: true,
